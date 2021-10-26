@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Neo ungdomsklubb</title>
+    <title>Rediger medlem</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css"/>
 </head>
 <body>
