@@ -2,10 +2,13 @@
     <html>
     <head>
       <title>Registrering av medlem</title>
-      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+      <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
     </head>
   <body>
     <?php
+  include("inc/config.php");
+  include("inc/navbar.php");
 
         if(isset($_POST["registrer"])) {
             echo "Bruker registrert";
