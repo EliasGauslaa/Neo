@@ -1,50 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Neo ungdomsklubb</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-</head>
-<body>
-
 <?php
-include("inc/config.php");
-include("inc/navbar.php");
-?>
+include ("inc/header.php");
+
+    if ($conn->connect_error) {
+        echo "Connection failed: " . $conn->connect_error;
+    } else { 
     
-    <div class='container'>
-        <table>
-        <tr>
-            <th>Medlem ID</th>
-            <th>Fornavn</th>
-            <th>Etternavn</th>
-            <th>Adresse</th>
-            <th>Postnummer</th>
-            <th>Poststed</th>
-            <th>Mobil</th>
-            <th>E-post</th>
-            <th>Født</th>
-            <th>Kjønn</th>
-            <th>Interesser</th>
-            <th>Medlem siden</th>
-            <th>Kontingentstatus</th>
-            <th>Rolle</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Andreas</td>
-            <td>Martinsen</td>
-            <td>Verven 4</td>
-            <td>4608</td>
-            <td>Kristiansand</td>
-            <td>91008947</td>
-            <td>andreas@outlook.com</td>
-            <td>08.09.1996</td>
-            <td>Gutt</td>
-            <td>Fotball</td>
-            <td>10.05.2021</td>
-            <td>Betalt</td>
-            <td>Trener</td>
-        </tr>
-        </table>
-</body>
-</html>
+    $membersQuery = "SELECT * FROM member JOIN gender ON gender.genderID=member.genderID";
+        
+    $result = $conn->query($membersQuery);
+
+    echo "<div class='container'>
+    <table>
+    <tr>
+        <th>Medlemsnr.</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+        <th>Adresse</th>
+        <th>Postnummer</th>
+        <th>Poststed</th>
+        <th>Mobil</th>
+        <th>E-post</th>
+        <th>Født</th>
+        <th>Kjønn</th>
+        <th>Medlem siden</th>
+        <th>Kontingentstatus</th>
+    </tr>";
+
+    while ($row = $result->fetch_assoc()){
+
+    echo "<tr>
+        <td>" . $row['memberID'] . "</td>
+        <td>" . $row['firstName'] . "</td>
+        <td>" . $row['lastName'] . "</td>
+        <td>" . $row['address'] . "</td>
+        <td>" . $row['zipCode'] . "</td>
+        <td>" . $row['postAddress'] . "</td>
+        <td>" . $row['phone'] . "</td>
+        <td>" . $row['email'] . "</td>
+        <td>" . $row['born'] . "</td>
+        <td>" . $row['gender'] . "</td>
+        <td>" . $row['memberSince'] . "</td>
+        <td>" . $row['contingentStatus'] . "</td>
+    </tr></div>";
+    }
+    echo "</table>";
+
+    $conn->close();
+    }
+
+
+    include ("inc/footer.php");
+?>
