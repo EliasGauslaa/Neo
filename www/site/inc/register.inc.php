@@ -3,23 +3,21 @@ include_once "config.php";
 
 $first = $_POST["fnavn"];
 $last = $_POST["enavn"];
-$adress = $_POST["adresse"];
-$postal = $_POST["pnummer"];
-$gender = $_POST["kjønn"];
+$address = $_POST["adresse"];
+$zip = $_POST["pnummer"];
+$zipCity = $_POST_["postadresse"];
 $email = $_POST["epost"];
 $phone = $_POST["tlf"];
 $birthDate = $_POST["fdato"];
-$memberDate = $_POST["mdato"];
-$interests = $_POST["interesser"];
-$activities = $_POST["kaktiviteter"];
+$gender = $_POST["kjønn"];
 $status = $_POST["betalt"];
 
-$sql = "INSERT INTO member (firstName, lastName, adress, 
-postNumber, gender, email, phone, born, memberSince,
-interests, courseActivities, contingentStatus) 
-VALUES ('$first', '$last', '$adress', '$postal',
-'$gender', '$email', '$phone', '$birthDate', '$memberDate',
-'$interests', '$activities', '$status');";
+$sql = "INSERT INTO member (firstName, lastName, address, 
+zipCode, postAddress, phone, email, born,
+gender, memberSince, contingentStatus) 
+VALUES ('$first', '$last', '$address', '$zip',
+'$zipCity', '$phone', '$email', '$birthDate',
+'$gender', 'CURDATE', '$status');";
 
 mysqli_query($conn, $sql);
 ?>
