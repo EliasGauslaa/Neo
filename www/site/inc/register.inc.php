@@ -3,11 +3,11 @@ include_once "config.php";
 
 $first = $_POST["fnavn"];
 $last = $_POST["enavn"];
-$address = $_POST["adresse"];
+$address = $_POST["addresse"];
 $zip = $_POST["pnummer"];
-$zipCity = $_POST_["postadresse"];
-$email = $_POST["epost"];
+$zipCity = $_POST["postadresse"];
 $phone = $_POST["tlf"];
+$email = $_POST["epost"];
 $birthDate = $_POST["fdato"];
 $gender = $_POST["kjønn"];
 $status = $_POST["betalt"];
@@ -17,7 +17,7 @@ zipCode, postAddress, phone, email, born,
 gender, memberSince, contingentStatus) 
 VALUES ('$first', '$last', '$address', '$zip',
 '$zipCity', '$phone', '$email', '$birthDate',
-'$gender', 'CURDATE', '$status');";
+'$gender', 'CURDATE()', '$status');";
 
 mysqli_query($conn, $sql);
 ?>
