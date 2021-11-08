@@ -9,6 +9,7 @@
     <?php
   include("inc/config.php");
   include("inc/navbar.php");
+  include("inc/register.inc.php");
 
         if(isset($_POST["registrer"])) {
             echo "Bruker registrert";
