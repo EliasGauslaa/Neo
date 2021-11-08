@@ -29,8 +29,8 @@
                 <label for="enavn"><b>Etternavn</b></label>
                 <input class="form-control" type="text" name="enavn" placeholder="Etternavn" required><br>
 
-                <label for="adresse"><b>Adresse</b></label>
-                <input class="form-control" type="text" name="adresse" placeholder="Gateadresse" required><br>
+                <label for="addresse"><b>Adresse</b></label>
+                <input class="form-control" type="text" name="addresse" placeholder="Gateadresse" required><br>
     
                 <label for="pnummer"><b>Postnummer</b></label>
                 <input class="form-control" type="int" name="pnummer" placeholder="Postnummer" required><br>
@@ -50,9 +50,6 @@
                 <label for="kjønn"><b>Kjønn</b></label>
                 <input type="radio" name="kjønn" value="1"> Male
                 <input type="radio" name="kjønn" value="2"> Female<br>
-                
-                <label for="interesser"><b>Interesser</b></label>
-                <input class="form-control" type="text" name="interesser" placeholder="Interesser"><br>
 
                 <label for="betalt"><b>Kontigentstatus</b></label>
                 <input type="radio" name="betalt" value="betalt"> Paid
