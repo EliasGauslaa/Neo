@@ -24,6 +24,7 @@ include ("inc/header.php");
         <th>Kjønn</th>
         <th>Medlem siden</th>
         <th>Kontingentstatus</th>
+        <th></th>
     </tr>";
 
     while ($row = $result->fetch_assoc()){
@@ -41,6 +42,7 @@ include ("inc/header.php");
         <td>" . $row['gender'] . "</td>
         <td>" . $row['memberSince'] . "</td>
         <td>" . $row['contingentStatus'] . "</td>
+        <td><button name='edit'><a href=edit.php?memberID=" . $row['memberID'] . " style='text-decoration: none;'> Rediger</a></button></td>
     </tr></div>";
     }
     echo "</table>";
