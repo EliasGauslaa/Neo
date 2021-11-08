@@ -30,7 +30,7 @@
                 <input class="form-control" type="text" name="enavn" placeholder="Etternavn" required><br>
 
                 <label for="addresse"><b>Adresse</b></label>
-                <input class="form-control" type="text" name="addresse" placeholder="Gateadresse" required><br>
+                <input class="form-control" type="text" name="adresse" placeholder="Gateadresse" required><br>
     
                 <label for="pnummer"><b>Postnummer</b></label>
                 <input class="form-control" type="int" name="pnummer" placeholder="Postnummer" required><br>

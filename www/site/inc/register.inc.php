@@ -18,7 +18,7 @@ if(isset($_POST['registrer'])){
     genderID, memberSince, contingentStatus) 
     VALUES ('$first', '$last', '$address', '$zip',
     '$zipCity', '$phone', '$email', '$birthDate',
-    '$gender', 'CURDATE()', '$status');";
+    '$gender', CURDATE(), '$status');";
 
     mysqli_query($conn, $sql);
 }
