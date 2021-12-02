@@ -20,7 +20,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                <h1>Registration</h1>
                 <p>Fyll inn for å registrere et medlem</p>
 
                 <label for="fnavn"><b>Fornavn</b></label>
