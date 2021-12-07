@@ -30,7 +30,7 @@ include ("inc/header.php");
         <td>" . $row['date'] . "</td>
         <td>" . $row['start'] . "</td>
         <td>" . $row['end'] . "</td>
-        <td><button name='join'><a href=activitiesJoin.php?activityID=" . $row['activityID'] . 
+        <td><button name='join'><a href=activity.php?activityID=" . $row['activityID'] . 
         " style='text-decoration: none;'> Legg til medlem</a></button></td>
     </tr></div>";
     }
