@@ -51,23 +51,25 @@
                 <input type="date" name="fdato" value="" required><br>
                                 
                 <label for="kjønn"><b>Kjønn</b></label>
-                <input type="radio" name="kjønn" value="1"> Male
-                <input type="radio" name="kjønn" value="2"> Female<br>
+                <input type="radio" name="kjønn" value="1"> Gutt
+                <input type="radio" name="kjønn" value="2"> Jente<br>
 
                 <label for="betalt"><b>Kontigentstatus</b></label>
-                <input type="radio" name="betalt" value="betalt"> Paid
-                <input type="radio" name="betalt" value="ikkeBetalt"> Not Paid<br>
+                <input type="radio" name="betalt" value="Betalt"> Betalt
+                <input type="radio" name="betalt" value="Ikke Betalt"> Ikke betalt<br>
 
-                <?php
-                echo "<b>Interesse <b>";
-                echo "<select name='interest'>";
-                while ($row = mysqli_fetch_array($result)) {
-                echo "<option value=" . $row['interest'] ."'>" . $row['interest'] ."</option>";
-                }
-                echo "</select>";
-                ?>
+                <label for="interest"><b>Interesse</b>
+                <select>
+                  <option></option>
+                  <?php                
+                    while ($row = mysqli_fetch_array($result)) {
+                      echo "<option value=" . $row['interest'] ."'>" . $row['interest'] ."</option>";
+                    }
+                  ?>
+                </select>
+                
                 <br><br>
-                <input type="submit" name="registrer" value="Registrér">
+                <input type="submit" name="registrer" value="Registrer">
                 </div>
             </div>
         </div>
