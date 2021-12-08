@@ -6,6 +6,7 @@
         <a href="edit.php">Rediger medlem</a>
         <a href="activities.php">Registrer aktivitet</a>
         <a href="activitiesMember.php">Aktiviteter</a>
+        <a href="interest.php">Interesser</a>
         <a href="#about">E-post</a>
         <a href="filter.php">Sorter medlemmer</a>
         <a href="login.php">Logg ut</a>

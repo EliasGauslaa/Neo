@@ -10,12 +10,16 @@
   include("inc/config.php");
   include("inc/navbar.php");
   include("inc/register.inc.php");
+  include("inc/interest.inc.php");
 
         if(isset($_POST["registrer"])) {
             echo "Bruker registrert";
         }
- 
-    ?>
+   
+        $sql = "SELECT interest FROM interests";
+        $result = mysqli_query($conn, $sql);
+
+   ?>
   <form action="registration.php" method="POST">
         <div class="container">
             <div class="row">
@@ -53,7 +57,16 @@
                 <label for="betalt"><b>Kontigentstatus</b></label>
                 <input type="radio" name="betalt" value="betalt"> Paid
                 <input type="radio" name="betalt" value="ikkeBetalt"> Not Paid<br>
-                
+
+                <?php
+                echo "<b>Interesse <b>";
+                echo "<select name='interest'>";
+                while ($row = mysqli_fetch_array($result)) {
+                echo "<option value=" . $row['interest'] ."'>" . $row['interest'] ."</option>";
+                }
+                echo "</select>";
+                ?>
+                <br><br>
                 <input type="submit" name="registrer" value="Registrér">
                 </div>
             </div>
