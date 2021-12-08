@@ -7,6 +7,8 @@ $member_select = mysqli_query($conn,"select * from member where memberID = $memb
 
 $rowMember = mysqli_fetch_array($member_select);
 
+$role_select = $conn->query("SELECT * FROM role");
+
 if(isset($_POST['edit'])){
 
     $firstName_post = ucfirst($_POST['firstName']);
@@ -23,15 +25,21 @@ if(isset($_POST['edit'])){
 
     $query_run_editMember = mysqli_query($conn, $editMember);
 
+    $ID = $_POST['role'];
+
+    $addRole = "INSERT INTO memberroles (`memberID`, `roleID`) VALUES ($member_ID, $ID)";
+
+    $query_run_addRole = mysqli_query($conn, $addRole);
+    
     if($query_run_editMember){   
         mysqli_close($conn); // Close connection
         header("location:index.php"); // redirects to members page
         exit;
     }
     else {
+        echo "noe gikk galt";
     } 
 }
-
 
 ?>
 
@@ -59,6 +67,19 @@ if(isset($_POST['edit'])){
 
             <label for="email">E-post*</label>
             <input type="text" name="email" value="<?php echo $rowMember['email']?>" required><br>
+
+            <label for="role">Rolle</label>
+            <select name="role">
+            <option></option>
+                <?php
+                while ($rows = $role_select->fetch_assoc()){
+                    $role = $rows['role'];
+                    $ID = $rows['roleID'];
+                    echo "<option value='$ID'>$role</option>";
+            }
+            ?>  
+        </select>
+        <br>
 
             <label for="contingent">Kontingentstatus*</label>
             <select name="contingent" required>
