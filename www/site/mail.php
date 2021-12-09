@@ -1,4 +1,13 @@
 <?php
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require '../../vendor/autoload.php';
+
 include 'inc/header.php';
 
 echo "<h1>Send mail</h1>";
@@ -25,27 +34,42 @@ if (isset($_POST['send'])){
     {
     $addresses[] = $row['email'];
     }
-    
-    ini_set("SMTP","ssl://smtp.gmail.com" );
-    ini_set("smtp_port","587");
-    ini_set('sendmail_from', 'andreashovland96@gmail.com');
-    $to = implode(", ", $addresses);
+
+    $to = implode(", ",$addresses);
     $from = $_POST['sendFrom'];
     $fromName = $_POST['fromName'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
-    $headers = "From: ". $fromName . "<" . $from . ">" . "\r\n";
-    
-    if(mail($to, $subject, $message, $headers)){
-        echo "Din e-post ble sendt";
-    } else {
-        echo "Din e-post ble ikke sendt<br>";
-        echo "<br>".$to. "<br>";
-        echo $fromName. "<br>";
-        echo $from. "<br>";
-        echo $subject. "<br>";
-        echo $message. "<br>";
-    }
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
+try {
+    //Server settings
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'smtp-mail.outlook.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'andrhm16@uia.no';                     //SMTP username
+    $mail->Password   = 'Kalender12345678910';                               //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+    $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+    //Recipients
+    $mail->setFrom($from, $fromName);
+    $mail->addAddress($to);     //Add a recipient
+
+    //Attachments
+
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = $subject;
+    $mail->Body    = $message;
+
+    $mail->send();
+    echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
 }
 ?>
 <form method="post">
