@@ -2,7 +2,6 @@
 
 <?php
 //Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -12,13 +11,17 @@ require '../../vendor/autoload.php';
 
 include 'inc/header.php';
 
+// henter alle aktiviteter og bruker disse i dropdown 
 $activitiesSelect = $conn->query("SELECT * FROM activities");
 
 if (isset($_POST['send'])){
 
+    // plasserer verdiene fra dropdowns i variabler
     $activityValue = $_REQUEST['activity'];
     $contingentValue = $_REQUEST['contingent'];
 
+    // Spørringer for contingent og aktiviteter som blir lagt til i SQL-spørringen dersom
+    // dropdownen ikke er tom 
     if (!empty($activityValue)) {
         $joinQuery[] = "select email from member 
         JOIN memberactivities ON memberactivities.memberID=member.memberID 
@@ -28,6 +31,7 @@ if (isset($_POST['send'])){
         $joinQuery[] = "select email from member where contingentStatus LIKE '%$contingentValue%'";
     }
 
+    // Spørringen som har en verdi blir kjørt
     $member_select = mysqli_query($conn, join($joinQuery));
 
     while($row = mysqli_fetch_array($member_select))

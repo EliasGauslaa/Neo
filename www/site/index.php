@@ -5,10 +5,13 @@ include ("inc/header.php");
         echo "Connection failed: " . $conn->connect_error;
     } else { 
     
+    // henter alle alle kolonnene fra member og joiner gender med genderID
     $membersQuery = "SELECT * FROM member JOIN gender ON gender.genderID=member.genderID";
         
+    // resultatet fra spørringen over lagres i result variabelen 
     $result = $conn->query($membersQuery);
 
+    // Skriver ut tabellen 
     echo "<div class='container'>
     <table>
     <tr>
@@ -25,6 +28,8 @@ include ("inc/header.php");
         <th></th>
     </tr>";
 
+    // radene og kolonnene fylles inn med informasjon fra databasen. De to siste kolonnene er 
+    // knapper som redirecter til andre sider og tar med seg memberID gjennom en GET metode
     while ($row = $result->fetch_assoc()){
 
     echo "<tr>
