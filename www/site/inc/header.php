@@ -1,3 +1,15 @@
+<?php
+    session_start();
+?>
+
+<?php
+    if (!isset($_SESSION["userUid"])) {
+        header("location: /Prosjekt1/Neo/www/site/login.php");
+        exit();
+    }
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
