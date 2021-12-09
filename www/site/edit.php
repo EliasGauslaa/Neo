@@ -1,19 +1,19 @@
 <?php
 include("inc/header.php");
 
-$member_ID = $_GET['memberID']; // henter memberID fra valgt rad
+$member_ID = $_GET['memberID']; // gets memberID from chosen row 
 
-$member_select = mysqli_query($conn,"select * from member where memberID = $member_ID"); // velger alt fra member med valgt memberID
+$member_select = mysqli_query($conn,"select * from member where memberID = $member_ID"); // selects all from member
 
-// henter verdiene fra raden
+// gets values from row
 $rowMember = mysqli_fetch_array($member_select);
 
-// henter verdier fra role som bruker i dropdown 
+//retrieves values from role  in dropdown
 $role_select = $conn->query("SELECT * FROM role");
 
 if(isset($_POST['edit'])){
 
-    // input fra feltene plasseres i variabler
+    //input from form is placed in variables
     $firstName_post = ucfirst($_POST['firstName']);
     $lastName_post = ucfirst($_POST['lastName']);
     $address_post = ucfirst($_POST['address']);
@@ -23,29 +23,29 @@ if(isset($_POST['edit'])){
     $email_post = $_POST['email'];
     $contingentStatus_post = $_POST['contingent'];
 
-    // oppdaterer member med de nye verdiene
+    //update member with the new values
     $editMember = mysqli_query($conn, "UPDATE member SET firstName='$firstName_post', lastName='$lastName_post', address='$address_post', zipCode=$zipCode_post, 
     postAddress='$postAddress_post', phone=$phone_post, email='$email_post', contingentStatus='$contingentStatus_post' WHERE memberID=$member_ID");
 
-    //Kjører querien
+    //Runs query
     $query_run_editMember = mysqli_query($conn, $editMember);
 
-    // plasserer valgt rolle og dens verdi i variabel 
+    //places chosen role and its value in variable 
     $ID = $_POST['role'];
 
-    // Legger memberID og roleID i memberroles 
+    //puts memberID and roleID in memberroles
     $addRole = "INSERT INTO memberroles (`memberID`, `roleID`) VALUES ($member_ID, $ID)";
 
-    // Kjører querien
+    //runs query
     $query_run_addRole = mysqli_query($conn, $addRole);
     
-    // Hvis en eller begge queriene går gjennom blir man sendt tilbake til hovedsiden
+    //if one of or both of the queries run, user gets sent back to index
     if($query_run_editMember or $query_run_addRole){   
         mysqli_close($conn); // Close connection
         header("location:index.php"); // redirects to members page
         exit;
     }
-    //feilmelding dersom noe går galt
+    //error message if something goes wrong
     else {
         echo "noe gikk galt";
     } 
@@ -57,7 +57,7 @@ if(isset($_POST['edit'])){
     <form method="post">
         <div class="box">
             
-        <!-- Feltene innehar databasens nåværende verdier -->
+        <!-- fields contain the current values in the db -->
             <label for="firstName">Fornavn*</label>
             <input type="text" name="firstName" value="<?php echo $rowMember['firstName']?>" required>
 

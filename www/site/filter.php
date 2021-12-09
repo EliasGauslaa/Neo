@@ -7,21 +7,20 @@ include ("inc/header.php");
 
     echo "<h2>Sorter medlemmer etter ønskede kriterier</h2>";
 
-    // Henter interesser og aktiviteter fra databasen og plasserer dem i dropdowns
+    // retrieves interests and activities from db and places them in dropdowns
     $interestSelect = $conn->query("SELECT interest FROM interests");
     $activitiesSelect = $conn->query("SELECT activity FROM activities");
     $roleSelect = $conn->query("SELECT * FROM role");
     
     if(isset($_POST['sort'])){
 
-        // Henter verdien fra dropdowns
+        //gets values from dropdowns
         $interestValue = $_REQUEST['interest'];
         $activityValue = $_REQUEST['activities'];
         $contingentValue = $_REQUEST['contingent'];
         $roleValue = $_REQUEST['role'];
         
-        // En matrise for interesser og aktiviteter som blir lagt til i SQL-spørringen dersom
-        // dropdownen ikke er tom 
+        //an array for interests and activities that are put in the query if the dropdown is not empty
         $joinQuery = array();
         if (!empty($interestValue)) {
             $joinQuery[] = " JOIN memberinterests ON memberinterests.memberID=member.memberID 
@@ -36,7 +35,7 @@ include ("inc/header.php");
             JOIN role ON role.roleID=memberroles.roleID ";
         }
 
-        // Matrise med WHERE-statements som blir lagt til dersom dropdownen ikke er tom
+        //array with wheer-statements that is added if the dropdown is not empty
         $whereQuery = array();
         if (!empty($interestValue)) {
             $whereQuery[] = "interest LIKE '%$interestValue%'";
@@ -51,14 +50,14 @@ include ("inc/header.php");
             $whereQuery[] = "role LIKE '%$roleValue%'";
         }
 
-        // Spørringen hvor JOIN og WHERE legges til avhengig om de har en verdi
+        // JOIN and WHERE is added if they are assigned a value
         $query = "SELECT firstName, lastName, address, zipCode, postAddress, phone, email FROM member"
         . join($joinQuery) ."
         WHERE " . join(' and ', $whereQuery) . " ORDER BY firstName ASC";
 
         $result = $conn->query($query);
         
-        // Viser brukeren hva den har søkt på
+        // displays what the user has searched
         echo "Ditt søk: <br><br>";
 
         if (!empty($interestValue)) {
@@ -74,7 +73,7 @@ include ("inc/header.php");
             echo "<b>Rolle: </b>" . $roleValue . "<br>";
         }
 
-        // Skriver ut tabellen
+        // echos the table
     echo "<div class='container'>
         <table>
         <tr>

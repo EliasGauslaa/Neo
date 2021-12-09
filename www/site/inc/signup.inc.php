@@ -11,27 +11,27 @@ if (isset($_POST["submit"])) {
     require_once "config.php";
     require_once "functions.inc.php";
 
-    if (emptyInputSignup($name, $email, $uid, $pwd, $pwdRepeat) !== false) {
-    header("location: ../signup.php?error=emptyinput");
+    if (emptyInputSignup($name, $email, $uid, $pwd, $pwdRepeat) !== false) {    
+    header("location: ../signup.php?error=emptyinput");     //checks for empty inputs
     exit();    
     }
 
     if (invalidEmail($email) !== false) {
         header("location: ../signup.php?error=invalidemail");
-        exit();
+        exit(); //checks for invalid email
     }
     
     if (pwdMatch($pwd, $pwdRepeat) !== false) {
         header("location: ../signup.php?error=invalidmatch");
-        exit();
+        exit(); //checks for matching password-inputs
     }
 
     if (uidExists($conn, $uid, $email) !== false) {
         header("location: ../signup.php?error=uidtaken");
-        exit();
+        exit(); //checks if username or email exists in the db
     }
 
-    createUser($conn, $name, $email, $uid, $pwd);
+    createUser($conn, $name, $email, $uid, $pwd); //creates user with the inputs
 }
 
 else {

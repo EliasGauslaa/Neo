@@ -2,14 +2,14 @@
 
 include("inc/header.php");
 
-// henter activityID fra tabellen
+// gets activityID from the table
 $activityID = $_GET['activityID'];
 
-// henter data fra databasen 
+// retrieves data from the database
 $membersSelect = $conn->query("SELECT * FROM member");
 $activitiesSelect = $conn->query("SELECT * FROM activities WHERE activityID = $activityID");
 
-// henter verdiene fra radene og plasserer de i variabler
+//retrieves values from the inputs and places them in variables
 $activitiesRows = $activitiesSelect->fetch_assoc();
 
 $activity = $activitiesRows['activity'];
@@ -18,7 +18,7 @@ $date = $activitiesRows['date'];
 $start = $activitiesRows['start'];
 $end = $activitiesRows['end'];
 
-// Skriver ut informasjon om aktiviteten
+//echos info about the activity
 echo "<h1>". $activity . " , " . $date . " kl. ". substr($start,0,5) . " - " . substr($end,0,5) . "</h1>";
 echo "<h2>Ansvarlig: $responsible </h2>";
 
@@ -27,25 +27,25 @@ if(isset($_POST['add'])){
     // memberID hentes fra valgt medlem i dropdown
     $memberID = $_POST['member'];
 
-    // Legger valgt memberID og activityID inn i memberactivities
+    //puts chosen memberID and activityID into memberactivities
     $query = "INSERT INTO memberactivities (memberID, activityID)
     VALUES ($memberID, $activityID)";
 
-    // if else til å sjekke om medlemmet ble meldt på eller om det allerede er påmeldt
+    //if else to check if member was assigned or if he/she already was
     if(mysqli_query($conn, $query)){
         echo "<h3>Valgt medlem er nå påmeldt. </h3>"; 
     } else{
         echo "Medlemmet er allerede påmeldt. ";
     }
 
-    // Select-statement for å hente ut alle medlemmer som er meldt på en viss aktivitet
+    //select statement to get all members that are assigned to one activity
     $signedup = "SELECT firstName, lastName FROM member
     JOIN memberactivities ON memberactivities.memberID=member.memberID
     WHERE activityID = $activityID";
         
     $signedupResult = $conn->query($signedup);
 
-    // Tabellen skrives ut
+    // echos the table
     echo "<div class='container'>
     <table>
     <tr>
