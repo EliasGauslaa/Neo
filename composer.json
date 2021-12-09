@@ -1,0 +1,17 @@
+{
+    "name": "vendor/neo",
+    "autoload": {
+        "psr-4": {
+            "Vendor\\Neo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "andreashovland",
+            "email": "andreashovland96@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.5"
+    }
+}
