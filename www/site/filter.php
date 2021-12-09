@@ -10,6 +10,7 @@ include ("inc/header.php");
     // Henter interesser og aktiviteter fra databasen og plasserer dem i dropdowns
     $interestSelect = $conn->query("SELECT interest FROM interests");
     $activitiesSelect = $conn->query("SELECT activity FROM activities");
+    $roleSelect = $conn->query("SELECT * FROM role");
     
     if(isset($_POST['sort'])){
 
@@ -17,6 +18,7 @@ include ("inc/header.php");
         $interestValue = $_REQUEST['interest'];
         $activityValue = $_REQUEST['activities'];
         $contingentValue = $_REQUEST['contingent'];
+        $roleValue = $_REQUEST['role'];
         
         // En matrise for interesser og aktiviteter som blir lagt til i SQL-spørringen dersom
         // dropdownen ikke er tom 
@@ -29,19 +31,24 @@ include ("inc/header.php");
             $joinQuery[] = " JOIN memberactivities ON memberactivities.memberID=member.memberID 
             JOIN activities ON activities.activityID=memberactivities.activityID ";
         }
+        if (!empty($roleValue)) {
+            $joinQuery[] = " JOIN memberroles ON memberroles.memberID=member.memberID 
+            JOIN role ON role.roleID=memberroles.roleID ";
+        }
 
-        // Matrise med WHERE-statements som blir lagt til dersom dropdownen ikk er tom
+        // Matrise med WHERE-statements som blir lagt til dersom dropdownen ikke er tom
         $whereQuery = array();
         if (!empty($interestValue)) {
             $whereQuery[] = "interest LIKE '%$interestValue%'";
         }
-
         if (!empty($activityValue)) {
             $whereQuery[] = "activity LIKE '%$activityValue%'";
         }
-
         if (!empty($contingentValue)) {
             $whereQuery[] = "contingentStatus LIKE '%$contingentValue%'";
+        }
+        if (!empty($roleValue)) {
+            $whereQuery[] = "role LIKE '%$roleValue%'";
         }
 
         // Spørringen hvor JOIN og WHERE legges til avhengig om de har en verdi
@@ -62,6 +69,9 @@ include ("inc/header.php");
         }
         if (!empty($contingentValue)) {
             echo "<b>Kontingentstatus: </b>" . $contingentValue . "<br>";
+        }
+        if (!empty($roleValue)) {
+            echo "<b>Rolle: </b>" . $roleValue . "<br>";
         }
 
         // Skriver ut tabellen
@@ -120,6 +130,17 @@ include ("inc/header.php");
             <option></option>
             <option value="Betalt">Betalt</option>
             <option value="Ikke betalt">Ikke betalt</option>
+        </select>
+
+        <label for="role">Rolle</label>
+        <select name="role">
+            <option></option>
+            <?php
+            while ($rows = $roleSelect->fetch_assoc()){
+                $role = $rows['role'];
+                echo "<option value=$role>$role</option>";
+            }
+            ?>  
         </select>
 
         <input type="submit" name="sort" value="Sorter">
