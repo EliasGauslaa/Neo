@@ -4,7 +4,7 @@
 
 <?php
     if (!isset($_SESSION["userUid"])) {
-        header("location: /Prosjekt/Neo/www/site/login.php");
+        header("location: /Neo/Neo/www/site/login.php");
         exit();
     }
 ?>

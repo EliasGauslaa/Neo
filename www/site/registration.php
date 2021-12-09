@@ -23,9 +23,12 @@
   <form action="registration.php" method="POST">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
+                <div class="card">
+                <div class="card-header">
                 <p>Fyll inn for å registrere et medlem</p>
+                </div>
 
+                <div class="card-body">
                 <label for="fnavn"><b>Fornavn</b></label>
                 <input class="form-control" type="text" name="fnavn" placeholder="Fornavn" required><br>
 
@@ -48,7 +51,7 @@
                 <input class="form-control" type="email" name="epost" placeholder="E-post" required><br>
 
                 <label for="fdato"><b>Fødselsdato</b></label>
-                <input type="date" name="fdato" value="" required><br>
+                <input type="date" class="form-control" name="fdato" value="" required><br>
                                 
                 <label for="kjønn"><b>Kjønn</b></label>
                 <input type="radio" name="kjønn" value="1"> Gutt
@@ -58,7 +61,7 @@
                 <input type="radio" name="betalt" value="Betalt"> Betalt
                 <input type="radio" name="betalt" value="Ikke Betalt"> Ikke betalt<br>
 
-                <label for="interest"><b>Interesse</b>
+                <label for="interest"><b>Interesse</b></label>
                 <select>
                   <option></option>
                   <?php                
@@ -69,7 +72,8 @@
                 </select>
                 
                 <br><br>
-                <input type="submit" name="registrer" value="Registrer">
+                <input type="submit" class="btn btn-primary" name="registrer" value="Registrer">
+                  </div>
                 </div>
             </div>
         </div>

@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="css/Bootstrap/bootstrap.css">
+
 <?php
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
@@ -9,8 +11,6 @@ use PHPMailer\PHPMailer\Exception;
 require '../../vendor/autoload.php';
 
 include 'inc/header.php';
-
-echo "<h1>Send mail</h1>";
 
 $activitiesSelect = $conn->query("SELECT * FROM activities");
 
@@ -72,15 +72,21 @@ try {
 }
 }
 ?>
+    <div class="container">
+        <div class="row">
+            <div class="card-header">
+                <h3>Send Mail</h3>
+            </div>
+            <div class="card-body">
 <form method="post">
     <p>
         <label for="sendFrom">Send fra</label>
-        <input type="text" name="sendFrom" placeholder="e-post" required><br>
+        <input type="text" class="form-control" name="sendFrom" placeholder="e-post" required><br>
         <label for="fromName">Navn på avsender</label>
-        <input type="text" name="fromName" required><br>
-    </p><br>
+        <input type="text" class="form-control" name="fromName" placeholder="ditt navn" required><br>
+    </p>
     <p>
-        Mailen gjelder for:
+        <h3>Mailen gjelder for:</h3>
     </p>
     <p>
         
@@ -116,7 +122,9 @@ try {
         <input type="submit" name="send" value="Send">
     </p>
 </form>
-
+            </div>
+        </div>
+    </div>
 <?php
     include 'inc/footer.php';
 ?>
