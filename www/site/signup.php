@@ -3,17 +3,25 @@
 include_once "inc/header.php"
 ?>
 
+<link rel="stylesheet" type="text/css" href="css/Bootstrap/bootstrap.css">
+
 <section>
-    <h2>Registrer</h2>
-    <div>
+    <div class="container">
+        <div class="row">
+            <div class="card-header">
+        <h2>Registrer en ny leder</h2>
+            </div>
+            <div class="card-body">
     <form action="inc/signup.inc.php" method="post">
-        <input type="text" name="name" placeholder="Fullt navn"><br>
-        <input type="text" name="email" placeholder="Email"><br>
-        <input type="text" name="uid" placeholder="Brukernavn"><br>
-        <input type="password" name="pwd" placeholder="Passord"><br>
-        <input type="password" name="pwd2" placeholder="Passord igjen"><br>
-        <button type="submit" name="submit">Registrèr</button>
+        <input type="text" class="form-control" name="name" placeholder="Fullt navn"><br>
+        <input type="text" class="form-control" name="email" placeholder="Email"><br>
+        <input type="text" class="form-control" name="uid" placeholder="Brukernavn"><br>
+        <input type="password" class="form-control" name="pwd" placeholder="Passord"><br>
+        <input type="password" class="form-control" name="pwd2" placeholder="Passord igjen"><br>
+        <button type="submit" class="btn btn-primary" name="submit">Registrèr</button>
     </form>
+            </div>
+        </div>
     </div>
 
     <?php

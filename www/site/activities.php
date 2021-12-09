@@ -18,14 +18,17 @@ include("inc/activities.inc.php");
         <title>Aktiviteter</title>
         <h1>Legg til aktivitet</h1>
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+        <link rel="stylesheet" type="text/css" href="css/Bootstrap/bootstrap.css">
     </head>
 <body>
     <form action="activities.php" method="POST">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
-                <p>Fyll inn for å registrere et medlem</p>
-
+                <div class="card">
+                    <div class="card-header">
+                <p>Fyll inn for å registrere en aktivitet</p>
+                    </div>
+                    <div class="card-body">
                 <label for="activity"><b>Aktivitet</b></label>
                 <input class="form-control" type="text" name="activity" placeholder="Navn på aktivitet" required><br>
 
@@ -41,8 +44,9 @@ include("inc/activities.inc.php");
                 <label for="end"><b>Klokkeslett slutt</b></label>
                 <input class="form-control" type="time" name="end" required><br>
 
-                <input type="submit" name="submit" value="Registrér">
+                <input type="submit" class="btn btn-primary" name="submit" value="Registrér">
 
+                    </div>  
                 </div>
             </div>
         </form>
