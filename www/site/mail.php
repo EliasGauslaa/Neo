@@ -11,17 +11,16 @@ require '../../vendor/autoload.php';
 
 include 'inc/header.php';
 
-// henter alle aktiviteter og bruker disse i dropdown 
+// getting all activities. These are used for the dropdowns
 $activitiesSelect = $conn->query("SELECT * FROM activities");
 
 if (isset($_POST['send'])){
 
-    // plasserer verdiene fra dropdowns i variabler
+    // the values from dropdowns are stored in variables
     $activityValue = $_REQUEST['activity'];
     $contingentValue = $_REQUEST['contingent'];
 
-    // Spørringer for contingent og aktiviteter som blir lagt til i SQL-spørringen dersom
-    // dropdownen ikke er tom 
+    // Query for contingent and activities. These are being placed in the sql-query if they have a value
     if (!empty($activityValue)) {
         $joinQuery[] = "select email from member 
         JOIN memberactivities ON memberactivities.memberID=member.memberID 
@@ -31,14 +30,17 @@ if (isset($_POST['send'])){
         $joinQuery[] = "select email from member where contingentStatus LIKE '%$contingentValue%'";
     }
 
-    // Spørringen som har en verdi blir kjørt
+    // The query with a value is executed
     $member_select = mysqli_query($conn, join($joinQuery));
 
+    // The emails are stored in a variable
     while($row = mysqli_fetch_array($member_select))
     {
     $addresses[] = $row['email'];
     }
 
+    // implode adresses variable to seperate the emails
+    // th other variables stores the input from the user
     $to = implode(", ",$addresses);
     $from = $_POST['sendFrom'];
     $fromName = $_POST['fromName'];
