@@ -31,7 +31,7 @@ if(isset($_POST['edit'])){
 
     $query_run_addRole = mysqli_query($conn, $addRole);
     
-    if($query_run_editMember){   
+    if($query_run_editMember or $query_run_addRole){   
         mysqli_close($conn); // Close connection
         header("location:index.php"); // redirects to members page
         exit;
